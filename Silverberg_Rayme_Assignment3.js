@@ -9,7 +9,12 @@ var myAge = parseInt(prompt("What is your age?",""));// Setting number variable
 var areYouScared = confirm("Are you scared " + myName + " ?");//Setting my boolean variable
 var myPrompt = prompt("What are you afraid of?", "");//setting my string variable
 
-var monsterArray = ["Dragon","Vampire","Poltergeist","Zombie","Chtulu"]; // an array with 5 elements
+var dragon  = {"Type": "Dragon", "Attack": "blow fire at you"};
+var vampire  = {"Type": "Vampire", "Attack": "suck your blood"};
+var poltergeist  = {"Type": "Poltergeist", "Attack": "haunt you"};
+var zombie  = {"Type": "Zombie", "Attack": "bite you"};
+var chtulu  = {"Type": "Chtulu", "Attack": "drown you"};
+var monsterArray = [dragon, vampire, poltergeist, zombie, chtulu]; // an array with 5 elements
 
 function yourFears(args) {// function for procedure
     if (args==="monsters" || args==="zombies" || args==="vampires") {//argument conditional
@@ -42,6 +47,9 @@ function theWalk(args, args2) {//boolean function
     return true;// return boolean
 }
 
+function totalMonstersRemaining(args) {
+    return args.length
+}
 
 function howManyMonsters(args,args2) {//number function
     var theMonsterArray = args2;//local variable 1
@@ -49,20 +57,23 @@ function howManyMonsters(args,args2) {//number function
     console.log("You must fight your way out of the alley!"); // output 1
     for(numMonsters; numMonsters > 0; numMonsters--){// for loop set up
         var remainingMonsters = numMonsters - 1; // math
-        console.log("A" + theMonsterArray[numMonsters-1] + " arrives to seal your fate...")
+        var currentMonster = theMonsterArray.pop();
+        console.log("A " + currentMonster["Type"] + " arrives to seal your fate. It attempts to " + currentMonster["Attack"] + ".");
         for(numPunches = 1; numPunches <= numMonsters; numPunches++){
             console.log("You have punched the monster " + numPunches +" times.");
         }
         console.log("The Monster is down!");
     }
-    console.log("You have succesfully defeated the monsters! Congratulations.");
-    return 0;// return number
+    var totalMonstersRemaining = totalMonstersRemaining(theMonsterArray);
+    console.log("There are " + totalMonstersRemaining + " monsters remaining.You have succesfully defeated the monsters! Congratulations.");
+
+    return theMonsterArray;// return array
 }
 
 
 function theString(args, args2) {// string function
-    var name= args;// local variable 1
-    var fearType= args2;//local variable 2
+    var name = args;// local variable 1
+    var fearType = args2;//local variable 2
     return (name + " the " + fearType + " are in your head! Concentrate on escaping your mind...");// return string, with concatonation
 }
 
